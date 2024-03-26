@@ -7,7 +7,7 @@ current_date=$(date +%s)
 expiration_date=$(dscl . -read /Users/$(whoami) | grep -A 1 "passwordLastSetTime" | tail -n 1 |  awk -F'<real>|</real>' '/<real>/ {printf "%.0f\n", $2}')
 
 # Calculate the number of days until password expiration
-days_until_expire=$((($expiration_date - $current_date) / 86400))
+days_until_expire=$((($current_date - $expiration_date) / 86400))
 
 # Threshold for prompting user (in days)
 threshold=53
